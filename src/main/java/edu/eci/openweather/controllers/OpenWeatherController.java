@@ -16,14 +16,22 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
-
+/**
+ * controller de las peticiones del clima
+ */
 @Controller
 @RequestMapping(value = "/clima")
 public class OpenWeatherController {
+
     @Autowired
 	OpenWeatherAppService crs;
-    
-    @GetMapping(value = "/{city}")
+
+	/**
+	 * realiza la peticion del clima de la ciudad ingresada
+	 * @param city nombre de la ciudad
+	 * @return clima de la ciudad
+	 */
+	@GetMapping(value = "/{city}")
     public ResponseEntity<?> getClimaCity(@PathVariable("city") String city) {
     	HttpHeaders headers = new HttpHeaders();
     	headers.set("Content-Type", "application/json");

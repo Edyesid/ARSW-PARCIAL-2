@@ -8,10 +8,16 @@ import org.springframework.stereotype.Service;
 import kong.unirest.Unirest;
 import kong.unirest.UnirestException;
 
-
+/**
+ * hace la coneccion con el apirest
+ */
 @Component
 public class HttpConnectApi {
-
+	/**
+	 * realiza la consulta y la retorna en tipo String para luego convertirla a json
+	 * @param city nombre de la ciudad
+	 * @return string json de la peticion
+	 */
 	public String getClima(String city) {
 		System.out.println(
 				"------------------------------======================getClima==============================--------------------------");
