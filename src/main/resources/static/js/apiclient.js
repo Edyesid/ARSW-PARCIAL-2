@@ -1,16 +1,16 @@
 var apiclient = (function(){
     return {
-        getCountry : function(country, callback) {
+        getClima : function(city, callback) {
             var promise = $.getJSON({
-                url: "/countries" + "/" + country
+                url: "/clima" + "/" + city
             });
             promise
                 .then(response => callback(response))
                 .catch(err => console.log(err));
         },
-        getUbicaciones : function(country, callback) {
+        getUbicaciones : function(city, callback) {
             var promise = $.getJSON({
-                url: "/countries" + "/" + country + "/" + country
+                url: "/clima" + "/" + city
             });
             promise
                 .then(response => callback(response))

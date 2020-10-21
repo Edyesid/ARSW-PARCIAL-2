@@ -32,47 +32,46 @@ var app = (function(){
         map.fitBounds(bounds);
     }
 
-    var buildTable = function(virus) {
-        console.log(virus.data.covid19Stats);
+    var buildTable = function(json) {
+        console.log(json.main)
         let table = $("#id_table > tbody");
         table.empty();
-        
-        virusByCountry = virus.data.covid19Stats.map(({province,deaths,confirmed,recovered}) =>({
-            province: province,
-            deaths:deaths,
-            confirmed:confirmed,
-            recovered:recovered,
-        }))
-        virusByCountry.forEach(({province,deaths,confirmed,recovered}) => {
-            table.append(
-                `<tr> 
-
-                      <th>${province}</th>
-                      <th>${deaths}</th>
-                      <th>${confirmed}</th>
-                      <th>${recovered}</th>
-                </tr>`
-            );
-        })
+        climaByCity = {
+            temp:json.main.temp,
+            feels_like:json.main.feels_like,
+            temp_min:json.main.temp_min,
+            temp_max:json.main.temp_max,
+            pressure:json.main.pressure,
+            humidity:json.main.humidity,
+        }
+        console.log(climaByCity);
+        table.append(
+            `<tr> 
+                <th>${json.main.temp}</th>
+                <th>${json.main.feels_like}</th>
+                <th>${json.main.temp_min}</th>
+                <th>${json.main.temp_max}</th>
+                <th>${json.main.pressure}</th>
+                <th>${json.main.humidity}</th>
+            </tr>`
+        );
+        ubicaciones(json);
     }
 
     var ubicaciones = function(propiedades) {
-        var json2 = JSON.stringify(propiedades); //posible
-        var json = propiedades[0];
+
+        var json = propiedades;
         coordenadas = [];			
-        var coordenadasJson = {lat:json.latlng[0], lng:json.latlng[1]};
+        var coordenadasJson = {lat:json.coord.lat, lng:json.coord.lon};
         coordenadas.push(coordenadasJson);
         console.log(coordenadas);
         initMap();
+
     }
 
     return {
-        getCountry: function(name) {
-            apiclient.getCountry(name,buildTable);
-        },
-        getUbicaciones: function(name) {
-            apiclient.getUbicaciones(name,ubicaciones)
-            app.getCountry(name);
+        getClima: function(name) {
+            apiclient.getClima(name,buildTable);
         }
     }
 })();

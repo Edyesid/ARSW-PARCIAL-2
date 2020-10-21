@@ -1,5 +1,7 @@
 package edu.eci.openweather.http;
 
+import kong.unirest.HttpResponse;
+import kong.unirest.JsonNode;
 import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Service;
 
@@ -9,52 +11,20 @@ import kong.unirest.UnirestException;
 
 @Component
 public class HttpConnectApi {
-	public String getAllCountries() {
-		String json = null;
-		try {
-			kong.unirest.HttpResponse<String> response = Unirest.get("https://rapidapi.p.rapidapi.com/v1/stats")
-					.header("x-rapidapi-host", "covid-19-coronavirus-statistics.p.rapidapi.com")
-					.header("x-rapidapi-key", "bf3a51a2fbmsha9cb1d8479b1204p1ed44ejsn98781f64912c").asString();
-			json = response.getBody();
-		} catch (UnirestException e) {
-			e.printStackTrace();
-		}
-		return json;
-	}
 
-	public String getCountry(String country) {
+	public String getClima(String city) {
 		System.out.println(
-				"------------------------------======================getCountry==============================--------------------------");
+				"------------------------------======================getClima==============================--------------------------");
 		String json = null;
 		try {
-			kong.unirest.HttpResponse<String> response = Unirest
-					.get("https://rapidapi.p.rapidapi.com/v1/stats?country=" + country)
-
-					.header("x-rapidapi-host", "covid-19-coronavirus-statistics.p.rapidapi.com")
-					.header("x-rapidapi-key", "bf3a51a2fbmsha9cb1d8479b1204p1ed44ejsn98781f64912c").asString();
+			HttpResponse<String> response = Unirest.get("http://api.openweathermap.org/data/2.5/weather?q="+city+"&appid=a8ea6e908a7be4c2c1f88bd82c198b13")
+					.header("accept", "application/json")
+					.asString();
 			json = response.getBody();
 			System.out.println(response);
 		} catch (UnirestException e) {
 			e.printStackTrace();
 		}
-		System.out.println(json);
-		return json;
-	}
-	
-	public String getUbication(String country) {
-		System.out.println(
-				"------------------------------======================getCountry==============================--------------------------");
-		String json = null;
-		try {
-			kong.unirest.HttpResponse<String> response = Unirest.get("https://rapidapi.p.rapidapi.com/name/" + country)
-					.header("x-rapidapi-host", "restcountries-v1.p.rapidapi.com")
-					.header("x-rapidapi-key", "bf3a51a2fbmsha9cb1d8479b1204p1ed44ejsn98781f64912c")
-					.asString();
-			json = response.getBody();
-		} catch (UnirestException e) {
-			e.printStackTrace();
-		}
-		System.out.println(json);
 		return json;
 	}
 	

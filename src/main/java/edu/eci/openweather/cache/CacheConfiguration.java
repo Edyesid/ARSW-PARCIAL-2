@@ -12,11 +12,11 @@ import edu.eci.openweather.model.StringJson;
 @Component
 public class CacheConfiguration {
 	
-	private ConcurrentHashMap<String, StringJson> cacheCountry = new ConcurrentHashMap<>();
+	private ConcurrentHashMap<String, StringJson> cache = new ConcurrentHashMap<>();
 	
-	public synchronized boolean cacheCountry(String country) {
+	public synchronized boolean isCache(String city) {
 		boolean hayCache = false;
-		if (cacheCountry.get(country) != null && System.currentTimeMillis() - cacheCountry.get(country).getTime() <= 180000) {
+		if (cache.get(city) != null && System.currentTimeMillis() - cache.get(city).getTime() <= 900000) {
 			hayCache = true;
 		}	
 		return hayCache;
@@ -24,11 +24,11 @@ public class CacheConfiguration {
 	
 	public void saveCache(String name, String stringjson) {
 		StringJson json = new StringJson(System.currentTimeMillis(), stringjson);
-		cacheCountry.put(name, json);
+		cache.put(name, json);
 		System.out.println("cache");
 	}
 	
 	public String getCache(String name) {
-		return cacheCountry.get(name).getStringJson();
+		return cache.get(name).getStringJson();
 	}
 }

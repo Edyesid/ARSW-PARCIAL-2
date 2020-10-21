@@ -14,26 +14,17 @@ public class OpenWeatherAppService {
 	@Autowired
 	CacheConfiguration cc;
 	
-	public String getCountry(String country) {
-		String virus;
-		if(cc.cacheCountry(country)) {
-			virus = cc.getCache(country);
+	public String getclima(String city) {
+		System.out.println("entro");
+		String json;
+		if(cc.isCache(city)) {
+			json = cc.getCache(city);
 			System.out.println("-------uso--cache------");
 		} else {
-			virus = hca.getCountry(country);
-			cc.saveCache(country, virus);
+			json = hca.getClima(city);
+			cc.saveCache(city, json);
 			System.out.println("-------guardo-cache-------");
 		}
-		return virus;
-	}
-	
-	public String getAllCountries() {
-		String virus = hca.getAllCountries();
-		return virus;
-	}
-	
-	public String getUbication(String country) {
-		String ubication = hca.getUbication(country);
-		return ubication;
+		return json;
 	}
 }

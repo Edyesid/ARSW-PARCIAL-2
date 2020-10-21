@@ -18,48 +18,18 @@ import org.springframework.web.bind.annotation.RequestMethod;
 
 
 @Controller
-@RequestMapping(value = "/countries")
+@RequestMapping(value = "/clima")
 public class OpenWeatherController {
     @Autowired
 	OpenWeatherAppService crs;
-   
     
-    @GetMapping(value="/{country}")
-    public ResponseEntity<?> getCountry(@PathVariable("country") String country) {
+    @GetMapping(value = "/{city}")
+    public ResponseEntity<?> getClimaCity(@PathVariable("city") String city) {
     	HttpHeaders headers = new HttpHeaders();
     	headers.set("Content-Type", "application/json");
     	try {
-    		
-    		String data = crs.getCountry(country);
+    		String data = crs.getclima(city);
 			return new ResponseEntity<>(data,headers,HttpStatus.ACCEPTED);
-    		
-    	} catch (Exception e) {
-            return new ResponseEntity<>("Error 404",HttpStatus.NOT_FOUND);
-    	}
-    }
-    
-    @GetMapping()
-    public ResponseEntity<?> getAllCountries() {
-    	HttpHeaders headers = new HttpHeaders();
-    	headers.set("Content-Type", "application/json");
-    	try {
-    		
-    		String data = crs.getAllCountries();
-			return new ResponseEntity<>(data,headers,HttpStatus.ACCEPTED);
-    		
-    	} catch (Exception e) {
-            return new ResponseEntity<>("Error 404",HttpStatus.NOT_FOUND);
-    	}
-    }
-    
-    @GetMapping(value="/{country}/{country}")
-    public ResponseEntity<?> getUbicaciones(@PathVariable("country") String country) {
-    	HttpHeaders headers = new HttpHeaders();
-    	headers.set("Content-Type", "application/json");
-    	try {
-    		
-    		String data = crs.getUbication(country);
-			return new ResponseEntity<>(data,HttpStatus.ACCEPTED);
     		
     	} catch (Exception e) {
             return new ResponseEntity<>("Error 404",HttpStatus.NOT_FOUND);

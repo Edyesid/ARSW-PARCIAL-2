@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<title>OpenWeather</title>
+<title>Open Weather</title>
 <script src="https://ajax.aspnetcdn.com/ajax/jQuery/jquery-3.4.1.min.js"></script>
 <script src="js/app.js"></script>
 <script src="js/apiclient.js"></script>
@@ -11,28 +11,31 @@
 <body>
     <center>
         <h1 align=center>Open Weather</h1>
-        <input id="input_country" type="text" placeholder="introduce el pais"></input>
-        <button onclick="app.getUbicaciones(input_country.value)">Mostrar resultados</button>
-    </center>
-    <center>
-        <div class="col">
-            <div id="map"></div>
-        </div>
+        <input id="input_city" type="text" placeholder="Campo de entrada de ciudad"></input>
+        <button onclick="app.getClima(input_city.value)">Buscar</button>
     </center>
 
     <center>
         <table id="id_table">
             <thead class="text-center">
             <tr>
-                <th>Region</th>
-                <th>muertes</th>
-                <th>activos</th>
-                <th>recuperados</th>
+                <th>temp</th>
+                <th>feels_like</th>
+                <th>temp_min</th>
+                <th>temp_max</th>
+                <th>pressure</th>
+                <th>humidity</th>
             </tr>
             </thead>
             <tbody></tbody>
         </table>
-
     </center>
+
+    <center>
+        <div class="col">
+            <div id="map"></div>
+        </div>
+    </center>
+
 </body>
 </html>
