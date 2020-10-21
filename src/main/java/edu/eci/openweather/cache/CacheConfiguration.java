@@ -41,7 +41,9 @@ public class CacheConfiguration {
 	}
 
 	/**
-		retorna el cache guardado
+	 * retorna el cache guardado
+	 * @param name nombre de la ciudad
+	 * @return peticion guardada en el hashmap cache
 	 */
 	public String getCache(String name) {
 		return cache.get(name).getStringJson();

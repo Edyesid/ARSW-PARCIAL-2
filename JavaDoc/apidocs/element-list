@@ -1,0 +1,6 @@
+edu.eci.openweather
+edu.eci.openweather.cache
+edu.eci.openweather.controllers
+edu.eci.openweather.http
+edu.eci.openweather.model
+edu.eci.openweather.services
